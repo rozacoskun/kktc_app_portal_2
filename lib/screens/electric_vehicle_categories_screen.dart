@@ -1,57 +1,31 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'car_years_screen.dart';
-import 'electric_vehicle_categories_screen.dart';
 
-class CarCategoriesScreen extends StatelessWidget {
-  const CarCategoriesScreen({super.key});
+class ElectricVehicleCategoriesScreen extends StatelessWidget {
+  const ElectricVehicleCategoriesScreen({super.key});
 
-  final List<String> _carSubcategories = const [
-    'Otomobil',
-    'Arazi, SUV & Pickup',
-    'Elektrikli Araçlar',
-    'Motosiklet',
-    'Minivan & Panelvan',
-    'Kiralık Araçlar',
-    'Deniz Araçları',
-    'Hasarlı Araçlar',
-    'Karavan',
-    'Klasik Araçlar',
-    'Hava Araçları',
-    'ATV & UTV',
-    'Engelli Plakalı Araçlar',
+  final List<String> _categories = const [
+    'Elektrikli Motosiklet',
+    'Elektrikli ATV',
+    'Elektrikli UTV',
+    'Elektrikli Kickscooter',
+    'Elektrikli Hizmet Araçları',
   ];
 
   IconData _getIconForCategory(String category) {
     switch (category) {
-      case 'Otomobil':
-        return Icons.directions_car;
-      case 'Arazi, SUV & Pickup':
-        return Icons.directions_car_filled;
-      case 'Elektrikli Araçlar':
-        return Icons.electric_car;
-      case 'Motosiklet':
-        return Icons.motorcycle;
-      case 'Minivan & Panelvan':
-        return Icons.airport_shuttle;
-      case 'Kiralık Araçlar':
-        return Icons.car_rental;
-      case 'Deniz Araçları':
-        return Icons.directions_boat;
-      case 'Hasarlı Araçlar':
-        return Icons.car_crash;
-      case 'Karavan':
-        return Icons.rv_hookup;
-      case 'Klasik Araçlar':
-        return Icons.time_to_leave;
-      case 'Hava Araçları':
-        return Icons.flight;
-      case 'ATV & UTV':
+      case 'Elektrikli Motosiklet':
+        return Icons.electric_bike;
+      case 'Elektrikli ATV':
         return Icons.all_inclusive;
-      case 'Engelli Plakalı Araçlar':
-        return Icons.accessible;
+      case 'Elektrikli UTV':
+        return Icons.all_inclusive;
+      case 'Elektrikli Kickscooter':
+        return Icons.electric_scooter;
+      case 'Elektrikli Hizmet Araçları':
+        return Icons.electric_car;
       default:
-        return Icons.directions_car;
+        return Icons.electric_car;
     }
   }
 
@@ -71,7 +45,7 @@ class CarCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba',
+              'Araba > Elektrikli Araçlar',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -90,7 +64,7 @@ class CarCategoriesScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: ListView.builder(
-        itemCount: _carSubcategories.length,
+        itemCount: _categories.length,
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(
@@ -110,13 +84,13 @@ class CarCategoriesScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
-                  _getIconForCategory(_carSubcategories[index]),
+                  _getIconForCategory(_categories[index]),
                   color: AppColors.primary,
                   size: 28,
                 ),
               ),
               title: Text(
-                _carSubcategories[index],
+                _categories[index],
                 style: const TextStyle(
                   fontSize: 17,
                   color: AppColors.textPrimary,
@@ -129,24 +103,7 @@ class CarCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_carSubcategories[index] == 'Otomobil' || 
-                    _carSubcategories[index] == 'Arazi, SUV & Pickup') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CarYearsScreen(
-                        category: _carSubcategories[index],
-                      ),
-                    ),
-                  );
-                } else if (_carSubcategories[index] == 'Elektrikli Araçlar') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricVehicleCategoriesScreen(),
-                    ),
-                  );
-                }
+                // TODO: Navigate to details screen
               },
             ),
           );
