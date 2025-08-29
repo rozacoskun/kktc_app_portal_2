@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'electric_motorcycle_brands_screen.dart';
+import 'car_search_filters_screen.dart';
 
-class ElectricVehicleCategoriesScreen extends StatelessWidget {
-  const ElectricVehicleCategoriesScreen({super.key});
+class ElectricMotorcycleBrandsScreen extends StatelessWidget {
+  const ElectricMotorcycleBrandsScreen({super.key});
 
-  final List<String> _categories = const [
-    'Elektrikli Motosiklet',
-    'Elektrikli ATV',
-    'Elektrikli UTV',
-    'Elektrikli Kickscooter',
-    'Elektrikli Hizmet Araçları',
+  final List<String> _brands = const [
+    'Volta',
+    'Arora',
+    'RKS',
+    'Yuki',
+    'Ecotrend',
+    'Super Soco',
+    'NIU',
+    'Horwin',
+    'Vmoto',
+    'Zero Motorcycles',
+    'Energica',
+    'Silence',
+    'Segway',
+    'Tinbot',
+    'Sunra',
   ];
-
-  IconData _getIconForCategory(String category) {
-    switch (category) {
-      case 'Elektrikli Motosiklet':
-        return Icons.electric_bike;
-      case 'Elektrikli ATV':
-        return Icons.all_inclusive;
-      case 'Elektrikli UTV':
-        return Icons.all_inclusive;
-      case 'Elektrikli Kickscooter':
-        return Icons.electric_scooter;
-      case 'Elektrikli Hizmet Araçları':
-        return Icons.electric_car;
-      default:
-        return Icons.electric_car;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +39,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba > Elektrikli Araçlar',
+              'Araba > Elektrikli Araçlar > Elektrikli Motosiklet',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -65,7 +58,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: ListView.builder(
-        itemCount: _categories.length,
+        itemCount: _brands.length,
         itemBuilder: (context, index) {
           return Container(
             decoration: BoxDecoration(
@@ -85,13 +78,13 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(
-                  _getIconForCategory(_categories[index]),
+                  Icons.electric_bike,
                   color: AppColors.primary,
                   size: 28,
                 ),
               ),
               title: Text(
-                _categories[index],
+                _brands[index],
                 style: const TextStyle(
                   fontSize: 17,
                   color: AppColors.textPrimary,
@@ -104,14 +97,16 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_categories[index] == 'Elektrikli Motosiklet') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricMotorcycleBrandsScreen(),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CarSearchFiltersScreen(
+                      category: 'Elektrikli Motosiklet',
+                      brand: _brands[index],
+                      year: DateTime.now().year,
                     ),
-                  );
-                }
+                  ),
+                );
               },
             ),
           );
