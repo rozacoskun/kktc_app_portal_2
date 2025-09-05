@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'electric_motorcycle_brands_screen.dart';
-import 'electric_atv_brands_screen.dart';
-import 'electric_utv_brands_screen.dart';
-import 'electric_kickscooter_brands_screen.dart';
-import 'electric_service_vehicle_brands_screen.dart';
+import 'damaged_car_brands_screen.dart';
+import 'damaged_motorcycle_brands_screen.dart';
+import 'damaged_commercial_vehicle_categories_screen.dart';
 
-class ElectricVehicleCategoriesScreen extends StatelessWidget {
-  const ElectricVehicleCategoriesScreen({super.key});
+class DamagedVehicleCategoriesScreen extends StatelessWidget {
+  const DamagedVehicleCategoriesScreen({super.key});
 
   final List<String> _categories = const [
-    'Elektrikli Motosiklet',
-    'Elektrikli ATV',
-    'Elektrikli UTV',
-    'Elektrikli Kickscooter',
-    'Elektrikli Hizmet Araçları',
+    'Hasarlı Otomobil',
+    'Hasarlı Motosiklet',
+    'Hasarlı Ticari Araçlar',
   ];
 
   IconData _getIconForCategory(String category) {
     switch (category) {
-      case 'Elektrikli Motosiklet':
-        return Icons.electric_bike;
-      case 'Elektrikli ATV':
-        return Icons.all_inclusive;
-      case 'Elektrikli UTV':
-        return Icons.all_inclusive;
-      case 'Elektrikli Kickscooter':
-        return Icons.electric_scooter;
-      case 'Elektrikli Hizmet Araçları':
-        return Icons.electric_car;
+      case 'Hasarlı Otomobil':
+        return Icons.directions_car;
+      case 'Hasarlı Motosiklet':
+        return Icons.motorcycle;
+      case 'Hasarlı Ticari Araçlar':
+        return Icons.local_shipping;
       default:
-        return Icons.electric_car;
+        return Icons.car_crash;
     }
   }
 
@@ -50,7 +42,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba > Elektrikli Araçlar',
+              'Araba > Hasarlı Araçlar',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -108,39 +100,25 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_categories[index] == 'Elektrikli Motosiklet') {
+                if (_categories[index] == 'Hasarlı Otomobil') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricMotorcycleBrandsScreen(),
+                      builder: (context) => const DamagedCarBrandsScreen(),
                     ),
                   );
-                } else if (_categories[index] == 'Elektrikli ATV') {
+                } else if (_categories[index] == 'Hasarlı Motosiklet') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricAtvBrandsScreen(),
+                      builder: (context) => const DamagedMotorcycleBrandsScreen(),
                     ),
                   );
-                } else if (_categories[index] == 'Elektrikli UTV') {
+                } else if (_categories[index] == 'Hasarlı Ticari Araçlar') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricUtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Kickscooter') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricKickscooterBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Hizmet Araçları') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricServiceVehicleBrandsScreen(),
+                      builder: (context) => const DamagedCommercialVehicleCategoriesScreen(),
                     ),
                   );
                 }

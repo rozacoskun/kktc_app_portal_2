@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Green color palette
-  static const Color primary = Color(0xFF52B788);      // #52b788 - Main green
-  static const Color secondary = Color(0xFF74C69D);    // #74c69d - Light green
-  static const Color accent = Color(0xFF95D5B2);       // #95d5b2 - Lighter green
-  static const Color warning = Color(0xFFB7E4C7);      // #b7e4c7 - Very light green
-  static const Color danger = Color(0xFF40916C);       // #40916c - Dark green
+  // New color palette
+  static const Color primary = Color(0xFF127369);      // #127369 - Main dark green
+  static const Color secondary = Color(0xFF10403B);    // #10403B - Darker green
+  static const Color accent = Color(0xFF8AA6A3);       // #8AA6A3 - Medium green
+  static const Color warning = Color(0xFF4C5958);      // #4C5958 - Dark grey
+  static const Color danger = Color(0xFFBFBFBF);       // #BFBFBF - Light grey
   
-  // Additional green shades
-  static const Color lightGreen = Color(0xFFD8F3DC);   // #d8f3dc - Lightest green
-  static const Color darkGreen = Color(0xFF2D6A4F);    // #2d6a4f - Darker green
-  static const Color darkestGreen = Color(0xFF1B4332); // #1b4332 - Darkest green
-  static const Color blackGreen = Color(0xFF081C15);   // #081c15 - Almost black green
+  // Additional shades
+  static const Color lightGreen = Color(0xFF8AA6A3);   // #8AA6A3 - Light green
+  static const Color darkGreen = Color(0xFF10403B);    // #10403B - Dark green
+  static const Color darkestGreen = Color(0xFF10403B); // #10403B - Darkest green
+  static const Color blackGreen = Color(0xFF10403B);   // #10403B - Almost black green
   
   // Background and surface colors
-  static const Color background = Color(0xFFE9E9E9);   // Light grey background
+  static const Color background = Color(0xFFBFBFBF);   // Light grey background
   static const Color surface = Colors.white;
-  static const Color textPrimary = Color(0xFF1B4332);  // Dark green for text
-  static const Color textSecondary = Color(0xFF2D6A4F); // Medium green for secondary text
-  static const Color divider = Color(0xFFD8F3DC);      // Light green for dividers
+  static const Color textPrimary = Color(0xFF10403B);  // Dark green for text
+  static const Color textSecondary = Color(0xFF4C5958); // Dark grey for secondary text
+  static const Color divider = Color(0xFF8AA6A3);      // Medium green for dividers
   
   // Gradient colors using the new palette
   static const LinearGradient primaryGradient = LinearGradient(
@@ -35,19 +35,32 @@ class AppColors {
   );
   
   static const LinearGradient warningGradient = LinearGradient(
-    colors: [warning, lightGreen],
+    colors: [warning, danger],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
   
   static const LinearGradient darkGradient = LinearGradient(
-    colors: [darkGreen, darkestGreen],
+    colors: [secondary, primary],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
   
   static const LinearGradient lightGradient = LinearGradient(
-    colors: [lightGreen, surface],
+    colors: [accent, surface],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  
+  // Additional gradients for variety
+  static const LinearGradient greenGradient = LinearGradient(
+    colors: [primary, accent],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+  
+  static const LinearGradient greyGradient = LinearGradient(
+    colors: [warning, danger],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );

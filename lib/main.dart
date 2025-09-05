@@ -34,6 +34,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
+  bool _isMenuOpen = false;
   
   final List<Widget> _screens = [
     const ContentSectionsScreen(), // İçerik - index 0
@@ -43,7 +44,11 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      body: Stack(
+        children: [
+          // Ana içerik
+          Scaffold(
+            appBar: AppBar(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -56,6 +61,14 @@ class _MainScreenState extends State<MainScreen> {
             ),
           ),
         ),
+        leading: IconButton(
+          icon: const Icon(Icons.menu, color: Colors.white),
+          onPressed: () {
+            setState(() {
+              _isMenuOpen = !_isMenuOpen;
+            });
+          },
+        ),
         title: const Text(
           'KKTC App',
           style: TextStyle(
@@ -63,12 +76,6 @@ class _MainScreenState extends State<MainScreen> {
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            // Left menu functionality can be added here
-          },
         ),
         actions: [
           IconButton(
@@ -79,8 +86,8 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ],
       ),
-      body: _screens[_currentIndex],
-      bottomNavigationBar: Container(
+            body: _screens[_currentIndex],
+            bottomNavigationBar: Container(
         height: 60,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -177,41 +184,35 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildBottomNavItem(IconData icon, String label, int index, bool isSelected, VoidCallback onTap) {
-    // Special styling for İlanlar (index 1) when selected
-    final bool isIlanlar = index == 1;
-    final double iconSize = isSelected && isIlanlar ? 32 : 28;
-    final double textSize = isSelected && isIlanlar ? 14 : 12;
-    final Color iconColor = isSelected ? AppColors.primary : (Colors.grey[600] ?? Colors.grey);
-    final Color textColor = isSelected ? AppColors.primary : (Colors.grey[600] ?? Colors.grey);
-    
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: iconColor,
-            size: iconSize,
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: textSize,
-              color: textColor,
-              fontWeight: isSelected && isIlanlar ? FontWeight.bold : FontWeight.normal,
             ),
-          ),
+          
+          // Hamburger menü
+          if (_isMenuOpen) _buildSlideMenu(),
+          
+          // Menü dışına tıklama overlay'i
+          if (_isMenuOpen)
+            Positioned(
+              left: 300,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _isMenuOpen = false;
+                  });
+                },
+                child: Container(
+                  color: Colors.black.withOpacity(0.3),
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
+
+
 
   void _showCombinedPanel(BuildContext context) {
     showModalBottomSheet(
@@ -472,6 +473,220 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildSlideMenu() {
+    return AnimatedPositioned(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+      left: _isMenuOpen ? 0 : -300,
+      top: 0,
+      bottom: 0,
+      child: Container(
+        width: 300,
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              blurRadius: 10,
+              offset: const Offset(2, 0),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            // Menü başlığı
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                gradient: AppColors.greenGradient,
+                borderRadius: const BorderRadius.only(
+                  bottomRight: Radius.circular(20),
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Text(
+                    'Menü',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isMenuOpen = false;
+                      });
+                    },
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
+            // Menü öğeleri
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildMenuItem('Kıbrıs Genel Bilgiler', Icons.info_rounded),
+                    _buildMenuItem('Kıbrıs Tarihi', Icons.history_rounded),
+                    
+                    // Gezilecek Yerler - Alt menü
+                    _buildMenuItemWithSubmenu(
+                      'Gezilecek Yerler',
+                      Icons.place_rounded,
+                      [
+                        'Tarihi ve Dini',
+                        'Doğa Güzellikleri',
+                        'Restoranlar',
+                        'Oteller Casinolar',
+                      ],
+                    ),
+                    
+                    _buildMenuItem('Kıbrıs Türkçesi', Icons.language_rounded),
+                    _buildMenuItem('Kıbrıs Mutfağı', Icons.restaurant_rounded),
+                    _buildMenuItem('Üniversiteler', Icons.school_rounded),
+                    _buildMenuItem('Spor Kulüpleri', Icons.sports_soccer_rounded),
+                    _buildMenuItem('Hastaneler', Icons.local_hospital_rounded),
+                    _buildMenuItem('Kıbrıs Efsaneleri', Icons.auto_stories_rounded),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuItem(String title, IconData icon) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            // Menü öğesi tıklandığında yapılacak işlem
+            setState(() {
+              _isMenuOpen = false;
+            });
+          },
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  color: AppColors.primary,
+                  size: 20,
+                ),
+                const SizedBox(width: 12),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: AppColors.textPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuItemWithSubmenu(String title, IconData icon, List<String> subItems) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  // Ana menü öğesi tıklandığında yapılacak işlem
+                  setState(() {
+                    _isMenuOpen = false;
+                  });
+                },
+                borderRadius: BorderRadius.circular(8),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  child: Row(
+                    children: [
+                      Icon(
+                        icon,
+                        color: AppColors.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 12),
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          color: AppColors.textPrimary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Alt menü öğeleri
+          Padding(
+            padding: const EdgeInsets.only(left: 32, top: 4),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: subItems.map((subItem) => 
+                Container(
+                  margin: const EdgeInsets.only(bottom: 4),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        // Alt menü öğesi tıklandığında yapılacak işlem
+                        setState(() {
+                          _isMenuOpen = false;
+                        });
+                      },
+                      borderRadius: BorderRadius.circular(6),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Text(
+                          '• $subItem',
+                          style: const TextStyle(
+                            color: AppColors.textSecondary,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

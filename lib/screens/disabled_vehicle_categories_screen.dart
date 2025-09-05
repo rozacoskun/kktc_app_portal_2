@@ -1,36 +1,27 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'electric_motorcycle_brands_screen.dart';
-import 'electric_atv_brands_screen.dart';
-import 'electric_utv_brands_screen.dart';
-import 'electric_kickscooter_brands_screen.dart';
-import 'electric_service_vehicle_brands_screen.dart';
+import 'car_search_filters_screen.dart';
+import 'disabled_car_brands_screen.dart';
 
-class ElectricVehicleCategoriesScreen extends StatelessWidget {
-  const ElectricVehicleCategoriesScreen({super.key});
+class DisabledVehicleCategoriesScreen extends StatelessWidget {
+  const DisabledVehicleCategoriesScreen({super.key});
 
   final List<String> _categories = const [
-    'Elektrikli Motosiklet',
-    'Elektrikli ATV',
-    'Elektrikli UTV',
-    'Elektrikli Kickscooter',
-    'Elektrikli Hizmet Araçları',
+    'Engelli Plakalı Otomobil',
+    'Engelli Plakalı Minivan & Panelvan',
+    'Engelli Plakalı Motosiklet',
   ];
 
   IconData _getIconForCategory(String category) {
     switch (category) {
-      case 'Elektrikli Motosiklet':
-        return Icons.electric_bike;
-      case 'Elektrikli ATV':
-        return Icons.all_inclusive;
-      case 'Elektrikli UTV':
-        return Icons.all_inclusive;
-      case 'Elektrikli Kickscooter':
-        return Icons.electric_scooter;
-      case 'Elektrikli Hizmet Araçları':
-        return Icons.electric_car;
+      case 'Engelli Plakalı Otomobil':
+        return Icons.directions_car;
+      case 'Engelli Plakalı Minivan & Panelvan':
+        return Icons.airport_shuttle;
+      case 'Engelli Plakalı Motosiklet':
+        return Icons.motorcycle;
       default:
-        return Icons.electric_car;
+        return Icons.accessible;
     }
   }
 
@@ -50,7 +41,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba > Elektrikli Araçlar',
+              'Araba > Engelli Plakalı Araçlar',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -108,39 +99,22 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_categories[index] == 'Elektrikli Motosiklet') {
+                if (_categories[index] == 'Engelli Plakalı Otomobil') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricMotorcycleBrandsScreen(),
+                      builder: (context) => const DisabledCarBrandsScreen(),
                     ),
                   );
-                } else if (_categories[index] == 'Elektrikli ATV') {
+                } else {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricAtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli UTV') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricUtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Kickscooter') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricKickscooterBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Hizmet Araçları') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricServiceVehicleBrandsScreen(),
+                      builder: (context) => CarSearchFiltersScreen(
+                        category: _categories[index],
+                        brand: '',
+                        year: DateTime.now().year,
+                      ),
                     ),
                   );
                 }

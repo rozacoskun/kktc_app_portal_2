@@ -20,6 +20,7 @@ class ClassifiedsScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 
                 // Modern Category Cards Row
+                // First Row
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -48,6 +49,37 @@ class ClassifiedsScreen extends StatelessWidget {
                           Icons.laptop,
                           AppColors.primary,
                           'Elektronik İlanları',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 12),
+                
+                // Second Row
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width - 44) / 3,
+                        child: _buildModernCategoryCard(
+                          '2. El Eşya',
+                          Icons.chair,
+                          AppColors.primary,
+                          'İkinci El Eşya İlanları',
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      SizedBox(
+                        width: (MediaQuery.of(context).size.width - 44) / 3,
+                        child: _buildModernCategoryCard(
+                          'İş İlanı',
+                          Icons.work,
+                          AppColors.primary,
+                          'İş ve Kariyer İlanları',
                         ),
                       ),
                     ],
@@ -145,8 +177,6 @@ class ClassifiedsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                
-                const SizedBox(height: 28),
                 
                 // Modern Section Header
                 Container(

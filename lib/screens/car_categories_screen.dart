@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import 'car_years_screen.dart';
+import 'motorcycle_brands_screen.dart';
+import 'minivan_years_screen.dart';
+import 'commercial_vehicle_categories_screen.dart';
+import 'rental_vehicle_categories_screen.dart';
+import 'marine_vehicle_categories_screen.dart';
+import 'damaged_vehicle_categories_screen.dart';
+import 'caravan_categories_screen.dart';
+import 'car_search_filters_screen.dart';
+import 'disabled_vehicle_categories_screen.dart';
 import 'electric_vehicle_categories_screen.dart';
 
 class CarCategoriesScreen extends StatelessWidget {
@@ -19,6 +28,7 @@ class CarCategoriesScreen extends StatelessWidget {
     'Klasik Araçlar',
     'Hava Araçları',
     'ATV & UTV',
+    'Ticari Araç',
     'Engelli Plakalı Araçlar',
   ];
 
@@ -48,6 +58,8 @@ class CarCategoriesScreen extends StatelessWidget {
         return Icons.flight;
       case 'ATV & UTV':
         return Icons.all_inclusive;
+      case 'Ticari Araç':
+        return Icons.local_shipping;
       case 'Engelli Plakalı Araçlar':
         return Icons.accessible;
       default:
@@ -144,6 +156,84 @@ class CarCategoriesScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => const ElectricVehicleCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Motosiklet') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MotorcycleBrandsScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Minivan & Panelvan') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MinivanYearsScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Ticari Araç') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CommercialVehicleCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Kiralık Araçlar') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RentalVehicleCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Deniz Araçları') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MarineVehicleCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Hasarlı Araçlar') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DamagedVehicleCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Karavan') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CaravanCategoriesScreen(),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Klasik Araçlar') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CarSearchFiltersScreen(
+                        category: 'Klasik Araçlar',
+                        brand: '',
+                        year: DateTime.now().year,
+                      ),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Hava Araçları') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CarSearchFiltersScreen(
+                        category: 'Hava Araçları',
+                        brand: '',
+                        year: DateTime.now().year,
+                      ),
+                    ),
+                  );
+                } else if (_carSubcategories[index] == 'Engelli Plakalı Araçlar') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DisabledVehicleCategoriesScreen(),
                     ),
                   );
                 }

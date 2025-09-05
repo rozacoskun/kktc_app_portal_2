@@ -1,36 +1,38 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'electric_motorcycle_brands_screen.dart';
-import 'electric_atv_brands_screen.dart';
-import 'electric_utv_brands_screen.dart';
-import 'electric_kickscooter_brands_screen.dart';
-import 'electric_service_vehicle_brands_screen.dart';
+import 'rental_car_brands_screen.dart';
 
-class ElectricVehicleCategoriesScreen extends StatelessWidget {
-  const ElectricVehicleCategoriesScreen({super.key});
+class RentalVehicleCategoriesScreen extends StatelessWidget {
+  const RentalVehicleCategoriesScreen({super.key});
 
   final List<String> _categories = const [
-    'Elektrikli Motosiklet',
-    'Elektrikli ATV',
-    'Elektrikli UTV',
-    'Elektrikli Kickscooter',
-    'Elektrikli Hizmet Araçları',
+    'Otomobil',
+    'Minivan & Panelvan',
+    'Motosiklet & ATV',
+    'Klasik Araç',
+    'Otobüs & Minibüs',
+    'Karavan',
+    'Elektrikli Araç',
   ];
 
   IconData _getIconForCategory(String category) {
     switch (category) {
-      case 'Elektrikli Motosiklet':
-        return Icons.electric_bike;
-      case 'Elektrikli ATV':
-        return Icons.all_inclusive;
-      case 'Elektrikli UTV':
-        return Icons.all_inclusive;
-      case 'Elektrikli Kickscooter':
-        return Icons.electric_scooter;
-      case 'Elektrikli Hizmet Araçları':
+      case 'Otomobil':
+        return Icons.directions_car;
+      case 'Minivan & Panelvan':
+        return Icons.airport_shuttle;
+      case 'Motosiklet & ATV':
+        return Icons.motorcycle;
+      case 'Klasik Araç':
+        return Icons.time_to_leave;
+      case 'Otobüs & Minibüs':
+        return Icons.directions_bus;
+      case 'Karavan':
+        return Icons.rv_hookup;
+      case 'Elektrikli Araç':
         return Icons.electric_car;
       default:
-        return Icons.electric_car;
+        return Icons.car_rental;
     }
   }
 
@@ -50,7 +52,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba > Elektrikli Araçlar',
+              'Araba > Kiralık Araçlar',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -108,39 +110,11 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_categories[index] == 'Elektrikli Motosiklet') {
+                if (_categories[index] == 'Otomobil') {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const ElectricMotorcycleBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli ATV') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricAtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli UTV') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricUtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Kickscooter') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricKickscooterBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Hizmet Araçları') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricServiceVehicleBrandsScreen(),
+                      builder: (context) => const RentalCarBrandsScreen(),
                     ),
                   );
                 }

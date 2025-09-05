@@ -1,36 +1,54 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'electric_motorcycle_brands_screen.dart';
-import 'electric_atv_brands_screen.dart';
-import 'electric_utv_brands_screen.dart';
-import 'electric_kickscooter_brands_screen.dart';
-import 'electric_service_vehicle_brands_screen.dart';
+import 'electronics_details_screen.dart';
+import 'computer_categories_screen.dart';
 
-class ElectricVehicleCategoriesScreen extends StatelessWidget {
-  const ElectricVehicleCategoriesScreen({super.key});
+class ElectronicsCategoriesScreen extends StatelessWidget {
+  const ElectronicsCategoriesScreen({super.key});
 
   final List<String> _categories = const [
-    'Elektrikli Motosiklet',
-    'Elektrikli ATV',
-    'Elektrikli UTV',
-    'Elektrikli Kickscooter',
-    'Elektrikli Hizmet Araçları',
+    'Bilgisayar',
+    'Telefon',
+    'Tablet',
+    'Çevre Birimleri',
+    'Kamera & Fotoğraf',
+    'Ev Elektroniği',
+    'Ev Aletleri',
+    'Akıllı Saat',
+    'Oyunculara Özel',
+    'Drone',
+    'TV',
+    'Projeksiyon Cihazı',
   ];
 
   IconData _getIconForCategory(String category) {
     switch (category) {
-      case 'Elektrikli Motosiklet':
-        return Icons.electric_bike;
-      case 'Elektrikli ATV':
-        return Icons.all_inclusive;
-      case 'Elektrikli UTV':
-        return Icons.all_inclusive;
-      case 'Elektrikli Kickscooter':
-        return Icons.electric_scooter;
-      case 'Elektrikli Hizmet Araçları':
-        return Icons.electric_car;
+      case 'Bilgisayar':
+        return Icons.computer;
+      case 'Telefon':
+        return Icons.phone_android;
+      case 'Tablet':
+        return Icons.tablet_mac;
+      case 'Kamera & Fotoğraf':
+        return Icons.camera_alt;
+      case 'Ev Elektroniği':
+        return Icons.home;
+      case 'Ev Aletleri':
+        return Icons.kitchen;
+      case 'Akıllı Saat':
+        return Icons.watch;
+      case 'Oyunculara Özel':
+        return Icons.sports_esports;
+      case 'Drone':
+        return Icons.airplanemode_active;
+      case 'TV':
+        return Icons.tv;
+      case 'Projeksiyon Cihazı':
+        return Icons.videocam;
+      case 'Çevre Birimleri':
+        return Icons.keyboard;
       default:
-        return Icons.electric_car;
+        return Icons.devices_other;
     }
   }
 
@@ -50,7 +68,7 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Araba > Elektrikli Araçlar',
+              'Elektronik',
               style: TextStyle(
                 color: Colors.white.withOpacity(0.8),
                 fontSize: 12,
@@ -108,42 +126,20 @@ class ElectricVehicleCategoriesScreen extends StatelessWidget {
                 size: 26,
               ),
               onTap: () {
-                if (_categories[index] == 'Elektrikli Motosiklet') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricMotorcycleBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli ATV') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricAtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli UTV') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricUtvBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Kickscooter') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricKickscooterBrandsScreen(),
-                    ),
-                  );
-                } else if (_categories[index] == 'Elektrikli Hizmet Araçları') {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ElectricServiceVehicleBrandsScreen(),
-                    ),
-                  );
-                }
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      if (_categories[index] == 'Bilgisayar') {
+                        return const ComputerCategoriesScreen();
+                      } else {
+                        return ElectronicsDetailsScreen(
+                          category: _categories[index],
+                        );
+                      }
+                    },
+                  ),
+                );
               },
             ),
           );

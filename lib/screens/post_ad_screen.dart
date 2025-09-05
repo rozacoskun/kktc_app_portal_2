@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
-import 'car_categories_screen.dart'; // Added import for CarCategoriesScreen
+import 'car_categories_screen.dart';
+import 'real_estate_categories_screen.dart';
+import 'electronics_categories_screen.dart';
+import 'electronics_details_screen.dart';
 
 class PostAdScreen extends StatefulWidget {
   const PostAdScreen({super.key});
@@ -14,274 +17,208 @@ class _PostAdScreenState extends State<PostAdScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'İlan Ver',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Kategori Seçin',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.8),
+                fontSize: 12,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         elevation: 0,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [AppColors.primary, AppColors.accent],
-            ),
-          ),
-        ),
-        title: const Text(
-          'İlan Ver',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.primary, AppColors.accent],
-          ),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              ),
-            ],
-          ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: const Text(
-                  'Kategori Seçin',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.primary,
-                  ),
+              const Text(
+                'Ne satmak istersiniz?',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
                 ),
               ),
               const SizedBox(height: 24),
-              
-               // Araba Kutusu
-               GestureDetector(
-                 onTap: () {
-                   Navigator.push(
-                     context,
-                     MaterialPageRoute(
-                       builder: (context) => const CarCategoriesScreen(),
-                     ),
-                   );
-                 },
-                 child: Container(
-                   width: double.infinity,
-                   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-                   decoration: BoxDecoration(
-                     color: AppColors.primary.withOpacity(0.08),
-                     borderRadius: BorderRadius.circular(12),
-                   ),
-                   child: Row(
-                     children: [
-                       Icon(
-                         Icons.directions_car_outlined,
-                         color: AppColors.primary,
-                         size: 28,
-                       ),
-                       const SizedBox(width: 20),
-                       Expanded(
-                         child: Text(
-                           'Araba',
-                           style: TextStyle(
-                             fontSize: 18,
-                             fontWeight: FontWeight.w600,
-                             color: AppColors.primary,
-                           ),
-                         ),
-                       ),
-                       Icon(
-                         Icons.arrow_forward_ios,
-                         color: AppColors.primary.withOpacity(0.6),
-                         size: 16,
-                       ),
-                     ],
-                   ),
-                 ),
-               ),
-               
-               const SizedBox(height: 20),
-               
-               // Emlak Kutusu
-               Container(
-                 width: double.infinity,
-                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-                 decoration: BoxDecoration(
-                   color: AppColors.primary.withOpacity(0.08),
-                   borderRadius: BorderRadius.circular(12),
-                 ),
-                 child: Row(
-                   children: [
-                     Icon(
-                       Icons.home_outlined,
-                       color: AppColors.primary,
-                       size: 28,
-                     ),
-                     const SizedBox(width: 20),
-                     Expanded(
-                       child: Text(
-                         'Emlak',
-                         style: TextStyle(
-                           fontSize: 18,
-                           fontWeight: FontWeight.w600,
-                           color: AppColors.primary,
-                         ),
-                       ),
-                     ),
-                     Icon(
-                       Icons.arrow_forward_ios,
-                       color: AppColors.primary.withOpacity(0.6),
-                       size: 16,
-                     ),
-                   ],
-                 ),
-               ),
-               
-               const SizedBox(height: 20),
-               
-               // Elektronik Kutusu
-               Container(
-                 width: double.infinity,
-                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
-                 decoration: BoxDecoration(
-                   color: AppColors.primary.withOpacity(0.08),
-                   borderRadius: BorderRadius.circular(12),
-                 ),
-                 child: Row(
-                   children: [
-                     Icon(
-                       Icons.devices_outlined,
-                       color: AppColors.primary,
-                       size: 28,
-                     ),
-                     const SizedBox(width: 20),
-                     Expanded(
-                       child: Text(
-                         'Elektronik',
-                         style: TextStyle(
-                           fontSize: 18,
-                           fontWeight: FontWeight.w600,
-                           color: AppColors.primary,
-                         ),
-                       ),
-                     ),
-                     Icon(
-                       Icons.arrow_forward_ios,
-                       color: AppColors.primary.withOpacity(0.6),
-                       size: 16,
-                     ),
-                   ],
-                 ),
-               ),
+              // Araba Kategorisi
+              _buildCategoryCard(
+                title: 'Araba',
+                description: 'Otomobil, SUV, Motosiklet ve daha fazlası...',
+                icon: Icons.directions_car,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CarCategoriesScreen(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              // Emlak Kategorisi
+              _buildCategoryCard(
+                title: 'Emlak',
+                description: 'Konut, İş Yeri, Arsa ve daha fazlası...',
+                icon: Icons.home_work,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RealEstateCategoriesScreen(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              // Elektronik Kategorisi
+              _buildCategoryCard(
+                title: 'Elektronik',
+                description: 'Telefon, Bilgisayar, Tablet ve daha fazlası...',
+                icon: Icons.devices,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ElectronicsCategoriesScreen(),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              // 2. El Eşya Kategorisi
+              _buildCategoryCard(
+                title: '2. El Eşya',
+                description: 'Mobilya, Beyaz Eşya, Ev Tekstili ve daha fazlası...',
+                icon: Icons.chair,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ElectronicsDetailsScreen(
+                        category: '2. El Eşya',
+                      ),
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 16),
+              // İş İlanı Kategorisi
+              _buildCategoryCard(
+                title: 'İş İlanı',
+                description: 'İş Arayan, Eleman Arayan ve daha fazlası...',
+                icon: Icons.work,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ElectronicsDetailsScreen(
+                        category: 'İş İlanı',
+                      ),
+                    ),
+                  );
+                },
+              ),
             ],
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 10,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            // Sol boşluk
-            const SizedBox(width: 20),
-            
-            // İçerik butonu
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context); // Ana sayfaya dön
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: Colors.grey[600],
-                      size: 28,
-                    ),
-                  ],
-                ),
+    );
+  }
+
+  Widget _buildCategoryCard({
+    required String title,
+    required String description,
+    required IconData icon,
+    required VoidCallback onTap,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
               ),
-            ),
-            
-            // Orta boşluk
-            const SizedBox(width: 20),
-            
-            // İlanlar butonu
-            Expanded(
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context); // Ana sayfaya dön
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.search,
-                      color: Colors.grey[600],
-                      size: 32,
-                      weight: 900,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            
-            // Orta boşluk
-            const SizedBox(width: 20),
-            
-            // İlan Ver butonu (aktif)
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 28,
-                    ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                ],
-              ),
+                  child: Icon(
+                    icon,
+                    color: AppColors.primary,
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        description,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: AppColors.textPrimary.withOpacity(0.6),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.textPrimary.withOpacity(0.3),
+                  size: 16,
+                ),
+              ],
             ),
-            
-            // Sağ boşluk
-            const SizedBox(width: 20),
-          ],
+          ),
         ),
       ),
     );
